@@ -1,4 +1,4 @@
-/* Basisstijl voor de klaverjassen score app */
+/* Basisstijl voor de klaverjassen score app v7 */
 
 body {
   font-family: Arial, sans-serif;
@@ -44,6 +44,7 @@ section h2 {
   font-size: 1.4rem;
 }
 
+/* Instellingen en teamnamen */
 .settings-row {
   display: flex;
   align-items: center;
@@ -66,13 +67,6 @@ section h2 {
   border-radius: 4px;
 }
 
-.settings-row.players > div {
-  flex: 1 1 45%;
-  min-width: 200px;
-  margin-bottom: 0.5rem;
-}
-
-/* Teamnamen layout voor twee teams met twee spelers */
 .team-column {
   flex: 1 1 45%;
   min-width: 200px;
@@ -90,9 +84,9 @@ section h2 {
   padding: 0.4rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  flex: 1;
 }
 
+/* Nieuwe ronde formulier */
 .round-row {
   display: flex;
   flex-wrap: wrap;
@@ -103,39 +97,6 @@ section h2 {
   flex: 1 1 150px;
   display: flex;
   flex-direction: column;
-}
-
-/* Roem-specifieke styling */
-.roem-col {
-  flex: 1 1 160px;
-}
-
-.roem-control {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.3rem;
-}
-
-.roem-control span {
-  min-width: 30px;
-  text-align: right;
-  font-weight: bold;
-}
-
-.roem-btn {
-  padding: 0.3rem 0.6rem;
-  background-color: #006b30;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  transition: background-color 0.2s ease;
-}
-
-.roem-btn:hover {
-  background-color: #005223;
 }
 
 .round-col label {
@@ -183,101 +144,21 @@ button:disabled {
   cursor: not-allowed;
 }
 
+button.danger {
+  background-color: #c92a2a;
+}
+button.danger:hover:not(:disabled) {
+  background-color: #a81e1e;
+}
+
+/* Hint tekst */
 .hint {
   font-size: 0.8rem;
   color: #555;
   margin-top: 0.5rem;
 }
 
-#scoreTable {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 0.5rem;
-}
-
-#scoreTable th,
-#scoreTable td {
-  padding: 0.6rem;
-  border: 1px solid #ddd;
-  text-align: center;
-}
-
-#scoreTable th {
-  background-color: #f0f0f0;
-  font-weight: bold;
-}
-
-#scoreTable tfoot th {
-  background-color: #e8e8e8;
-}
-
-/* Stijl voor tussenstandbericht */
-#intermediateMessage {
-  margin-top: 0.5rem;
-  padding: 0.6rem;
-  background-color: #fffae6;
-  border: 1px solid #ffd966;
-  border-radius: 4px;
-  font-size: 0.9rem;
-  color: #4d4d00;
-  display: none;
-}
-
-@media (max-width: 600px) {
-  .settings-row label {
-    min-width: 80px;
-  }
-  .round-col {
-    flex: 1 1 100%;
-  }
-  .round-col.buttons {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-  button {
-    flex: 1 1 auto;
-    width: 48%;
-  }
-}
-
-/* Responsieve weergave van het scorebord op kleine schermen */
-@media (max-width: 600px) {
-  #scoreTable {
-    width: 100%;
-  }
-  #scoreTable thead {
-    display: none;
-  }
-  #scoreTable tbody tr {
-    display: block;
-    margin-bottom: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 0.4rem;
-  }
-  #scoreTable tbody td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.3rem 0;
-    border: none;
-  }
-  #scoreTable tbody td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    flex: 1 1 50%;
-    max-width: 50%;
-    padding-right: 0.5rem;
-  }
-  #scoreTable tbody td:last-child {
-    border-bottom: none;
-  }
-  #scoreTable tfoot {
-    display: none;
-  }
-}
-
-/* Team button group styling */
+/* Team knoppen */
 .team-button-group {
   display: flex;
   gap: 0.4rem;
@@ -303,7 +184,121 @@ button:disabled {
   color: #fff;
 }
 
-/* Modal styling */
+/* Roem knoppen */
+.roem-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+.roem-control span {
+  min-width: 30px;
+  text-align: right;
+  font-weight: bold;
+}
+.roem-btn {
+  padding: 0.3rem 0.6rem;
+  background-color: #006b30;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+.roem-btn:hover {
+  background-color: #005223;
+}
+
+/* Kaart (suit) knoppen */
+.suit-button-group {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+.suit-button-group .suit-btn {
+  flex: 1 1 auto;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.suit-button-group .suit-btn:hover {
+  background-color: #d5d5d5;
+}
+.suit-button-group .suit-btn.selected {
+  background-color: #b13a3a;
+  border-color: #b13a3a;
+  color: #fff;
+}
+
+/* Samenvatting scorebord */
+#summaryTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+#summaryTable th,
+#summaryTable td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 0.9rem;
+}
+#summaryTable th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+#summaryTable tfoot th {
+  background-color: #e8e8e8;
+  font-weight: bold;
+}
+
+/* Detail scorebord */
+#detailTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+#detailTable th,
+#detailTable td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  font-size: 0.85rem;
+}
+#detailTable th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+#detailTable tfoot th {
+  background-color: #e8e8e8;
+  font-weight: bold;
+}
+
+/* Detail modal content larger width and scrollable */
+.detail-content {
+  width: 95%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.detail-content .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.detail-content .modal-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+/* Modal styling (shared) */
 .modal {
   position: fixed;
   top: 0;
@@ -311,17 +306,21 @@ button:disabled {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
+
 .modal-content {
   background-color: #fff;
   padding: 1rem;
   border-radius: 8px;
   width: 90%;
   max-width: 500px;
+  /* Zorg ervoor dat modals op kleine schermen niet buiten beeld vallen */
+  max-height: 90vh;
+  overflow-y: auto;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 .modal-content h3 {
@@ -349,15 +348,20 @@ button:disabled {
   gap: 0.6rem;
   margin-top: 0.8rem;
 }
-button.danger {
-  background-color: #c92a2a;
-}
-button.danger:hover:not(:disabled) {
-  background-color: #a81e1e;
+
+/* Tussenstand bericht */
+#intermediateMessage {
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  background-color: #fffae6;
+  border: 1px solid #ffd966;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #4d4d00;
+  display: none;
 }
 
-/* Edit button styling */
-/* Edit cel of knop styling */
+/* Edit knop in scorebord */
 .edit-btn {
   cursor: pointer;
   font-size: 1rem;
@@ -365,4 +369,21 @@ button.danger:hover:not(:disabled) {
 }
 .edit-btn:hover {
   color: #004d21;
+}
+
+@media (max-width: 600px) {
+  /* Maak teksten en cellen compacter op kleinere schermen */
+  #summaryTable th,
+  #summaryTable td,
+  #detailTable th,
+  #detailTable td {
+    font-size: 0.75rem;
+    padding: 0.3rem;
+  }
+  .modal-content {
+    width: 95%;
+  }
+  .detail-content {
+    width: 98%;
+  }
 }
