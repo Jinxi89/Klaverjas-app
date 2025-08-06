@@ -1,0 +1,331 @@
+/* Basisstijl voor de klaverjassen score app */
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+header {
+  background-color: #006b30;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+header p {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+section {
+  margin-bottom: 1.5rem;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+  margin-top: 0;
+  font-size: 1.4rem;
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.settings-row label {
+  min-width: 100px;
+  margin-right: 0.5rem;
+}
+
+.settings-row select,
+.settings-row input[type="text"] {
+  flex: 1;
+  padding: 0.4rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.settings-row.players > div {
+  flex: 1 1 45%;
+  min-width: 200px;
+  margin-bottom: 0.5rem;
+}
+
+/* Teamnamen layout voor twee teams met twee spelers */
+.team-column {
+  flex: 1 1 45%;
+  min-width: 200px;
+  margin-bottom: 0.5rem;
+}
+
+.team-names {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-top: 0.3rem;
+}
+
+.team-names input[type="text"] {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+}
+
+.round-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.round-col {
+  flex: 1 1 150px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Roem-specifieke styling */
+.roem-col {
+  flex: 1 1 160px;
+}
+
+.roem-control {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.roem-control span {
+  min-width: 30px;
+  text-align: right;
+  font-weight: bold;
+}
+
+.roem-btn {
+  padding: 0.3rem 0.6rem;
+  background-color: #006b30;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background-color 0.2s ease;
+}
+
+.roem-btn:hover {
+  background-color: #005223;
+}
+
+.round-col label {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+
+.round-col input,
+.round-col select {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.round-col.buttons {
+  flex: 1 1 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #fff;
+  background-color: #006b30;
+  transition: background-color 0.2s ease;
+}
+
+button.secondary {
+  background-color: #888;
+}
+
+button:hover:not(:disabled) {
+  background-color: #005223;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+#scoreTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 0.5rem;
+}
+
+#scoreTable th,
+#scoreTable td {
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+#scoreTable th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+#scoreTable tfoot th {
+  background-color: #e8e8e8;
+}
+
+/* Stijl voor tussenstandbericht */
+#intermediateMessage {
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  background-color: #fffae6;
+  border: 1px solid #ffd966;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #4d4d00;
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .settings-row label {
+    min-width: 80px;
+  }
+  .round-col {
+    flex: 1 1 100%;
+  }
+  .round-col.buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  button {
+    flex: 1 1 auto;
+    width: 48%;
+  }
+}
+
+/* Team button group styling */
+.team-button-group {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+}
+.team-button-group .team-btn {
+  flex: 1 1 auto;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+  color: #333;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.team-button-group .team-btn:hover {
+  background-color: #d5d5d5;
+}
+.team-button-group .team-btn.selected {
+  background-color: #006b30;
+  border-color: #006b30;
+  color: #fff;
+}
+
+/* Modal styling */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+.modal-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.6rem;
+}
+.modal-field label {
+  margin-bottom: 0.3rem;
+  font-weight: bold;
+}
+.modal-field input {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.8rem;
+}
+button.danger {
+  background-color: #c92a2a;
+}
+button.danger:hover:not(:disabled) {
+  background-color: #a81e1e;
+}
+
+/* Edit button styling */
+/* Edit cel of knop styling */
+.edit-btn {
+  cursor: pointer;
+  font-size: 1rem;
+  color: #006b30;
+}
+.edit-btn:hover {
+  color: #004d21;
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Klaverjassen Score App</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Klaverjassen Score App</h1>
+      <p>
+        Houd eenvoudig de punten bij van een potje klaverjassen. Vul de punten
+        van het team dat telt in en de app berekent automatisch de punten van
+        het andere team. Roem kun je apart noteren, maar wordt wel bij het
+        totaal opgeteld.
+      </p>
+    </header>
+
+    <main>
+      <!-- Spelinstellingen -->
+      <section id="settings">
+        <h2>Spelinstellingen</h2>
+        <div class="settings-row">
+          <label for="variantSelect">Variant:</label>
+          <select id="variantSelect">
+            <option value="amsterdams">Amsterdams</option>
+            <option value="rotterdams">Rotterdams</option>
+            <option value="utrechts">Utrechts</option>
+            <option value="willekeurig">Willekeurig</option>
+          </select>
+        </div>
+        <div class="settings-row players">
+          <!-- Team 1 met twee spelers -->
+          <div class="team-column">
+            <label>Team 1:</label>
+            <div class="team-names">
+              <input type="text" id="team1Player1" placeholder="Naam 1" />
+              <input type="text" id="team1Player2" placeholder="Naam 2" />
+            </div>
+          </div>
+          <!-- Team 2 met twee spelers -->
+          <div class="team-column">
+            <label>Team 2:</label>
+            <div class="team-names">
+              <input type="text" id="team2Player1" placeholder="Naam 3" />
+              <input type="text" id="team2Player2" placeholder="Naam 4" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nieuwe ronde invoer -->
+      <section id="newRound">
+        <h2>Nieuwe ronde</h2>
+        <div class="round-row">
+          <!-- Spelend team knoppen -->
+          <div class="round-col select-buttons">
+            <label>Team speelt:</label>
+            <div id="playingTeamButtons" class="team-button-group">
+              <button type="button" class="team-btn" data-team="wij">Wij</button>
+              <button type="button" class="team-btn" data-team="zij">Zij</button>
+            </div>
+          </div>
+          <!-- Teller team knoppen -->
+          <div class="round-col select-buttons">
+            <label>Team telt:</label>
+            <div id="tellerTeamButtons" class="team-button-group">
+              <button type="button" class="team-btn" data-team="wij">Wij</button>
+              <button type="button" class="team-btn" data-team="zij">Zij</button>
+            </div>
+          </div>
+          <div class="round-col">
+            <label for="pointsInput">Punten van teller:</label>
+            <input
+              type="number"
+              id="pointsInput"
+              placeholder="0-162"
+              min="0"
+              max="162"
+            />
+          </div>
+          <!-- Roem voor Wij -->
+          <div class="round-col roem-col">
+            <label>Roem Wij:</label>
+            <div class="roem-control" data-team="wij">
+              <span id="wijRoemDisplay">0</span>
+              <button type="button" id="wijRoem20" class="roem-btn">+20</button>
+              <button type="button" id="wijRoem50" class="roem-btn">+50</button>
+            </div>
+          </div>
+          <!-- Roem voor Zij -->
+          <div class="round-col roem-col">
+            <label>Roem Zij:</label>
+            <div class="roem-control" data-team="zij">
+              <span id="zijRoemDisplay">0</span>
+              <button type="button" id="zijRoem20" class="roem-btn">+20</button>
+              <button type="button" id="zijRoem50" class="roem-btn">+50</button>
+            </div>
+          </div>
+          <!-- Actieknoppen -->
+          <div class="round-col buttons">
+            <button id="addRoundBtn">Ronde toevoegen</button>
+            <button id="resetGameBtn" class="secondary">Nieuw spel</button>
+          </div>
+        </div>
+        <p class="hint">
+          Kies welk team de punten telt en welk team speelt. Voer de behaalde
+          punten van het tellende team in; de punten van het andere team worden
+          automatisch berekend (162 minus de punten van de teller). Gebruik de
+          roemknoppen om +20 of +50 roem toe te voegen aan beide teams. Het
+          spelende team hoeft niet hetzelfde te zijn als het tellende team: het
+          spelende team moet meer punten (inclusief roem) behalen dan de
+          tegenpartij om niet nat te gaan. Als een team alle slagen binnenhaalt
+          (162 punten), krijgen zij automatisch 100 roem extra (pit).
+        </p>
+      </section>
+
+      <!-- Scorebord -->
+      <section id="scoreBoard">
+        <h2>Scorebord</h2>
+        <table id="scoreTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Wij punten</th>
+              <th>Wij roem</th>
+              <th>Wij totaal</th>
+              <th>Zij punten</th>
+              <th>Zij roem</th>
+              <th>Zij totaal</th>
+              <th>Spelend team</th>
+              <th>Nat?</th>
+              <th>Pit?</th>
+              <th>Acties</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+          <tfoot>
+            <tr>
+              <th>Totaal</th>
+              <th id="totWijPoints">0</th>
+              <th id="totWijRoem">0</th>
+              <th id="totWijTotal">0</th>
+              <th id="totZijPoints">0</th>
+              <th id="totZijRoem">0</th>
+              <th id="totZijTotal">0</th>
+              <th colspan="3"></th>
+            </tr>
+          </tfoot>
+        </table>
+        <!-- Tussenstand bericht -->
+        <div id="intermediateMessage"></div>
+      <!-- Bewerken-modal -->
+      <div id="editModal" class="modal" style="display:none;">
+        <div class="modal-content">
+          <h3>Ronde bewerken</h3>
+          <div class="modal-field">
+            <label for="editPointsInput">Punten (tellend team):</label>
+            <input type="number" id="editPointsInput" min="0" max="162" />
+          </div>
+          <div class="modal-field">
+            <label>Team speelt:</label>
+            <div id="editPlayingTeamButtons" class="team-button-group">
+              <button type="button" class="team-btn" data-team="wij">Wij</button>
+              <button type="button" class="team-btn" data-team="zij">Zij</button>
+            </div>
+          </div>
+          <div class="modal-field">
+            <label>Team telt:</label>
+            <div id="editTellerTeamButtons" class="team-button-group">
+              <button type="button" class="team-btn" data-team="wij">Wij</button>
+              <button type="button" class="team-btn" data-team="zij">Zij</button>
+            </div>
+          </div>
+          <div class="modal-field">
+            <label for="editWijRoemInput">Roem Wij:</label>
+            <input type="number" id="editWijRoemInput" min="0" />
+          </div>
+          <div class="modal-field">
+            <label for="editZijRoemInput">Roem Zij:</label>
+            <input type="number" id="editZijRoemInput" min="0" />
+          </div>
+          <div class="modal-actions">
+            <button id="saveEditBtn">Opslaan</button>
+            <button id="deleteRoundBtn" class="danger">Verwijderen</button>
+            <button id="cancelEditBtn" class="secondary">Annuleren</button>
+          </div>
+        </div>
+      </div>
+      <!-- Eindspel-modal voor felicitatie -->
+      <div id="finalModal" class="modal" style="display:none;">
+        <div class="modal-content">
+          <h3 id="finalHeader">Gefeliciteerd!</h3>
+          <p id="finalText"></p>
+          <div class="modal-actions">
+            <button id="closeFinalBtn">OK</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
