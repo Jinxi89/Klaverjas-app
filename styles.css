@@ -240,43 +240,6 @@ button:disabled {
   }
 }
 
-/* Responsieve weergave van het scorebord op kleine schermen */
-@media (max-width: 600px) {
-  #scoreTable {
-    width: 100%;
-  }
-  #scoreTable thead {
-    display: none;
-  }
-  #scoreTable tbody tr {
-    display: block;
-    margin-bottom: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 0.4rem;
-  }
-  #scoreTable tbody td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.3rem 0;
-    border: none;
-  }
-  #scoreTable tbody td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    flex: 1 1 50%;
-    max-width: 50%;
-    padding-right: 0.5rem;
-  }
-  #scoreTable tbody td:last-child {
-    border-bottom: none;
-  }
-  #scoreTable tfoot {
-    display: none;
-  }
-}
-
 /* Team button group styling */
 .team-button-group {
   display: flex;

@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const zijRoem50Btn = document.getElementById('zijRoem50');
   const addRoundBtn = document.getElementById('addRoundBtn');
   const resetGameBtn = document.getElementById('resetGameBtn');
-  const clearInputsBtn = document.getElementById('clearInputsBtn');
   const scoreTableBody = document.querySelector('#scoreTable tbody');
   const intermediateMessageEl = document.getElementById('intermediateMessage');
   const totWijPointsEl = document.getElementById('totWijPoints');
@@ -265,33 +264,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // Functie om het scorebord te renderen
   function renderTable() {
     scoreTableBody.innerHTML = '';
-    // Array met labels voor data-label attributen in dezelfde volgorde als de cellen
-    const labels = ['#','Wij punten','Wij roem','Wij totaal','Zij punten','Zij roem','Zij totaal','Spelend team','Nat?','Pit?','Acties'];
     rounds.forEach((r, index) => {
       r.roundNo = index + 1;
       const row = scoreTableBody.insertRow(-1);
-      // Data voor de cellen (alleen tekst, actie wordt later gezet)
-      const cellValues = [
-        r.roundNo,
-        r.wijPoints,
-        r.wijRoem,
-        r.wijTotal,
-        r.zijPoints,
-        r.zijRoem,
-        r.zijTotal,
-        r.playingTeam,
-        r.nat ? 'Ja' : 'Nee',
-        r.pit ? 'Ja' : 'Nee'
-      ];
-      // Voeg cells toe voor alle waarden
-      cellValues.forEach((val, i) => {
-        const cell = row.insertCell(-1);
-        cell.setAttribute('data-label', labels[i]);
-        cell.textContent = val;
-      });
-      // Actie cell
-      const actionCell = row.insertCell(-1);
-      actionCell.setAttribute('data-label', labels[10]);
+      row.insertCell(0).textContent = r.roundNo;
+      row.insertCell(1).textContent = r.wijPoints;
+      row.insertCell(2).textContent = r.wijRoem;
+      row.insertCell(3).textContent = r.wijTotal;
+      row.insertCell(4).textContent = r.zijPoints;
+      row.insertCell(5).textContent = r.zijRoem;
+      row.insertCell(6).textContent = r.zijTotal;
+      row.insertCell(7).textContent = r.playingTeam;
+      row.insertCell(8).textContent = r.nat ? 'Ja' : 'Nee';
+      row.insertCell(9).textContent = r.pit ? 'Ja' : 'Nee';
+      const actionCell = row.insertCell(10);
+      // Hele cel klikbaar maken voor bewerken; toon een potloodje als inhoud
       actionCell.innerHTML = '✏️';
       actionCell.classList.add('edit-btn');
       actionCell.setAttribute('onclick', `openEditModal(${index})`);
@@ -503,16 +490,6 @@ document.addEventListener('DOMContentLoaded', () => {
   saveEditBtn.addEventListener('click', saveEdit);
   deleteRoundBtn.addEventListener('click', deleteRound);
   cancelEditBtn.addEventListener('click', closeEditModal);
-
-  // Clear-button: reset huidige invoer (punten en roem)
-  clearInputsBtn.addEventListener('click', () => {
-    // Zet roem counters terug naar 0
-    currentWijRoem = 0;
-    currentZijRoem = 0;
-    updateRoemDisplays();
-    // Maak puntenveld leeg
-    pointsInput.value = '';
-  });
 
 
   // Opslaan van spelers en variant wanneer aangepast
